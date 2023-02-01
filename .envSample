@@ -1,6 +1,5 @@
-DB_NAME=''                                  #Your Database Name
-DB_USER=''                                  #Your Database Username
-DB_PASSWORD=''                              #Your Database Password
+DB_NAME='emailDB'                                  #Your Database Name
+DB_USER='yoga'                                  #Your Database Username
+DB_PASSWORD='1234'                              #Your Database Password
 
 
-EXPRESS_SESSION_SECRET=""                       #Secret key value anything for the secure session
