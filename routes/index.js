@@ -10,12 +10,12 @@ router.get('/dashboard', DashboardController.getDashboard )
 router.get('/company-contact', DashboardController.getCompanyContact )
 
 //Send Mailbox
-router.get('/send', DashboardController.getExcel )
-router.post('/send', DashboardController.postExcel )
+router.get('/send', DashboardController.getMailbox  )
+router.post('/send', DashboardController.postMailbox )
 
 //Upload Excel
-router.get('/excel', DashboardController.getMailbox )
-router.post('/excel', DashboardController.postMailbox )
+router.get('/excel', DashboardController.getExcel )
+router.post('/excel', DashboardController.postExcel )
 
 //CRUD Company
 router.get('/companys', DashboardController.getCompanyAll )
