@@ -20,7 +20,7 @@
 ## Development
 Clone the repo and install dependencies:
 ```bash
-git clone git@github.com:addyani/email-gateway.git
+git clone git@github.com:Apudms/email-gateway.git
 npm install
 ```
 
