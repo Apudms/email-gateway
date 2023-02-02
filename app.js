@@ -3,13 +3,20 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
-var session = require('express-session');
+const session = require('express-session');
 require('dotenv').config();
-const db = require('./models')
+const db = require("./models");
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var schedulerRouter = require('./routes/scheduler');
+var authRouter = require('./routes/auth');
+var companyRouter = require('./routes/company');
+var contactRouter = require('./routes/contact');
+var importExcelRouter = require('./routes/importExcel');
+var mailboxRouter = require('./routes/mailbox');
+var mailboxSchedulerRouter = require('./routes/mailboxScheduler');
+var mailboxTemplateRouter = require('./routes/mailboxTemplate');
+var sendEmailRouter = require('./routes/sendEmail');
 
 var app = express();
 
@@ -22,20 +29,31 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.use(session({
+  secret: process.env.EXPRESS_SESSION_SECRET,
+  resave: false,
+  saveUninitialized: true
+}));
 
 db.sequelize
   .sync()
-  .then((res)=> {
-    console.log("data successfull sync to database");
+  .then(() => {
+    console.log("sync db");
   })
   .catch((err) => {
-    console.log("Error ... ", err);
+    console.log(err.message);
   });
 
-
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/scheduler', schedulerRouter);
+app.use('/authorize', authRouter);
+app.use('/company', companyRouter);
+app.use('/contact', contactRouter);
+app.use('/import-excel', importExcelRouter);
+app.use('/mailbox', mailboxRouter);
+app.use('/mailbox-scheduler', mailboxSchedulerRouter);
+app.use('/mailbox-template', mailboxTemplateRouter);
+app.use('/send-email', sendEmailRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
