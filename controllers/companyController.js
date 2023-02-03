@@ -66,6 +66,25 @@ class CompanyController {
             });
         };
     };
+
+    static async postCreate(req, res, next) {
+        var payload = {
+            name: req.body.name,
+            address: req.body.address
+        };
+        await Company.create(payload)
+            .then(data => {
+                res.status(200).json({
+                    info: "create success",
+                    data: payload
+                });
+            })
+            .catch(err => {
+                res.status(400).json({
+                    info: err
+                });
+            });
+    };
 };
 
 module.exports = CompanyController
