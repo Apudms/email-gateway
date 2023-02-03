@@ -107,6 +107,24 @@ class CompanyController {
                 });
             });
     };
+
+    static async getDelete(req, res, next) {
+        const id = req.params.id;
+        await Company.destroy({
+            where: { id: id }
+        })
+            .then(data => {
+                res.status(200).json({
+                    info: "delete success",
+                    data: data
+                });
+            })
+            .catch(err => {
+                res.status(400).json({
+                    info: err
+                });
+            });
+    };
 };
 
 module.exports = CompanyController
