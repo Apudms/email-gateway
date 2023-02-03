@@ -16,6 +16,20 @@ class CompanyController {
             });
         };
     };
+
+    static async getAllInclude(req, res, next) {
+        const data = await Company.findAll({ include: Contact });
+        if (data) {
+            res.status(200).json({
+                info: "find all success",
+                data: data
+            });
+        } else {
+            res.status(400).json({
+                info: "Company not found"
+            });
+        };
+    };
 };
 
 module.exports = CompanyController
