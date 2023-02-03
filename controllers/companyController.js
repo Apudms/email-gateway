@@ -85,6 +85,28 @@ class CompanyController {
                 });
             });
     };
+
+    static async postUpdate(req, res, next) {
+        const id = req.params.id;
+        var payload = {
+            name: req.body.name,
+            address: req.body.address
+        };
+        await Company.update(payload, {
+            where: { id: id }
+        })
+            .then(data => {
+                res.status(200).json({
+                    info: "update success",
+                    data: payload
+                });
+            })
+            .catch(err => {
+                res.status(400).json({
+                    info: err
+                });
+            });
+    };
 };
 
 module.exports = CompanyController
