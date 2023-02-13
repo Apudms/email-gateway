@@ -6,6 +6,7 @@
 /public/excels
 /public/files
 /.env
+/models/index.js
 
 
 ### Linux ###
